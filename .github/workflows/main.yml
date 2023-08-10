@@ -1,0 +1,27 @@
+name: Docker Image Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: "0 6 * * 1-5"
+  workflow_dispatch:
+  
+jobs:
+  login_build_push_delete_pull:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: login to docker.io
+      run: echo ${{ secrets.DOCKERPW }} | docker login -u ${{ secrets.DOCKERUSER }} --password-stdin 2> /dev/null
+    - name: build dockerfile
+      run: docker build . --file Dockerfile --no-cache --tag ${{ secrets.DOCKERUSER }}/${{ secrets.DOCKERIMG }}:latest
+    - name: push up to docker.io
+      run: docker push ${{ secrets.DOCKERUSER }}/${{ secrets.DOCKERIMG }}:latest 
+    - name: delete local docker image
+      run: docker rmi -f ${{ secrets.DOCKERUSER }}/${{ secrets.DOCKERIMG }}:latest  
+    - name: pull from docker.io
+      run: docker pull ${{ secrets.DOCKERUSER }}/${{ secrets.DOCKERIMG }}:latest 
+      
