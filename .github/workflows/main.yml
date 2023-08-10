@@ -25,5 +25,5 @@ jobs:
     - name: pull from docker.io
       run: docker pull ${{ secrets.DOCKERUSER }}/${{ secrets.DOCKERIMG }}:latest 
     - name: run it
-      run: docker run -it ${{ secrets.DOCKERUSER }}/${{ secrets.DOCKERIMG }}:latest  cat /home/user/main.yml
+      run: docker run -i ${{ secrets.DOCKERUSER }}/${{ secrets.DOCKERIMG }}:latest  cat /home/user/main.yml
  
