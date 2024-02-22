@@ -27,6 +27,6 @@ jobs:
     - name: run it
       run: docker run -i ${{ secrets.DOCKERUSER }}/${{ secrets.DOCKERIMG }}:latest  cat /home/user/main.yml
     - name: email
-      run: python3 emailit.py ${{ secrets.SENDER }} ${{ secrets.PASSWORD }} ${{ secrets.RECEIVER }} ${{ secrets.SUBJECT }} ${{ secrets.BODY }}
+      run: python3 emailit.py ${{ secrets.SENDER }} ${{ secrets.PASSWORD }} ${{ secrets.RECEIVER }} `date` "$(cat /home/user/main.yml)"
 
  
