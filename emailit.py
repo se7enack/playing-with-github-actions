@@ -17,7 +17,7 @@ def emailsend():
     global receiver
     global body
     receiver = sys.argv[3]
-    subject = sys.argv[4]
+    subject = f"{sys.argv[4]}"
     body = f'''
     {sys.argv[5]}
     '''
