@@ -9,7 +9,7 @@ ssl._create_default_https_context = ssl._create_stdlib_context
 
 # create pw here https://myaccount.google.com/u/4/apppasswords after you enable 2-factor
 sender = sys.argv[1]
-password = sys.argv[2]
+password = '\"sys.argv[2]\"'
 
 
 def emailsend():
